@@ -13,7 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.conf.urls import url, include
     2. Add a URL to urlpatterns:  url(r'^blog/', include('blog.urls'))
 """
-from django.conf.urls import url
+from django.conf.urls import url, include
 from django.contrib import admin
 from foodtaskerapp import views
 from django.contrib.auth import views as auth_views
@@ -28,4 +28,6 @@ urlpatterns = [
     url(r'^restaurant/sign_out$', auth_views.logout, { 'next_page' : '/' }, name="restaurant-sign-out"),
     url(r'^restaurant/sign_up$', views.restaurant_signup, name="restaurant-sign-up"),
     url(r'^restaurant$', views.restaurant_home, name="restaurant-home"),
+    url(r'^api/social/', include('rest_framework_social_oauth2.urls')),
+
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
